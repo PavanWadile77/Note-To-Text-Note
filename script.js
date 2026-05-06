@@ -324,56 +324,78 @@ function processImage(imageUrl) {
     document.getElementById('upload-area').classList.add('hidden');
     document.getElementById('processing-area').classList.remove('hidden');
 
-    // Simulate AI Processing Steps
-    simulateProcessing();
+    // Run Real AI Processing
+    runTesseractOCR(imageUrl);
 }
 
-function simulateProcessing() {
+async function runTesseractOCR(imageUrl) {
     const progressBar = document.getElementById('scan-progress');
     const statusText = document.getElementById('processing-status');
     const stepOcr = document.getElementById('step-ocr');
     const stepDiagram = document.getElementById('step-diagram');
 
     let progress = 0;
-    progressBar.style.width = '0%';
-    
-    // Step 1: Enhancement
-    setTimeout(() => {
-        progress = 30;
-        progressBar.style.width = progress + '%';
-        statusText.innerText = "Scanning Full Page (OCR)...";
-        stepOcr.classList.remove('pending');
-        stepOcr.classList.add('active');
-        stepOcr.querySelector('i').classList.remove('fa-circle');
-        stepOcr.querySelector('i').classList.add('fa-check');
-    }, 1500);
+    progressBar.style.width = '10%';
+    statusText.innerText = "Initializing AI Engine...";
 
-    // Step 2: Diagram Recognition
-    setTimeout(() => {
-        progress = 70;
-        progressBar.style.width = progress + '%';
-        statusText.innerText = "Recreating All Diagrams & Layout...";
+    try {
+        if (!window.Tesseract) throw new Error("Tesseract library not loaded.");
+
+        const worker = await Tesseract.createWorker('eng', 1, {
+            logger: m => {
+                if (m.status === 'recognizing text') {
+                    let p = Math.floor(m.progress * 100);
+                    progressBar.style.width = (10 + (p * 0.8)) + '%';
+                    statusText.innerText = `Extracting Real Text... ${p}%`;
+
+                    if (p > 5 && stepOcr.classList.contains('pending')) {
+                        stepOcr.classList.remove('pending');
+                        stepOcr.classList.add('active');
+                        stepOcr.querySelector('i').classList.remove('fa-circle');
+                        stepOcr.querySelector('i').classList.add('fa-spinner', 'fa-spin');
+                    }
+                }
+            }
+        });
+
+        const { data: { text } } = await worker.recognize(imageUrl);
+        await worker.terminate();
+
+        // Mark steps complete
+        stepOcr.querySelector('i').classList.remove('fa-spinner', 'fa-spin');
+        stepOcr.querySelector('i').classList.add('fa-check');
         stepDiagram.classList.remove('pending');
         stepDiagram.classList.add('active');
         stepDiagram.querySelector('i').classList.remove('fa-circle');
         stepDiagram.querySelector('i').classList.add('fa-check');
-    }, 3500);
 
-    // Done
-    setTimeout(() => {
         progressBar.style.width = '100%';
-        statusText.innerText = "Finalizing Document...";
-        setTimeout(showResult, 800);
-    }, 5500);
+        statusText.innerText = "Finalizing Output...";
+
+        setTimeout(() => {
+            showResult(text);
+        }, 500);
+
+    } catch (err) {
+        console.error("OCR Failed:", err);
+        showToast("Error processing image. Please try again.", "error");
+        resetScanner();
+    }
 }
 
-function showResult() {
+function showResult(extractedText) {
     document.getElementById('processing-area').classList.add('hidden');
     document.getElementById('result-area').classList.remove('hidden');
     window.showToast("Scan completed successfully!", "success");
 
-    // Populate mock extracted content based on user language
-    updateExtractedText();
+    const textContainer = document.getElementById('extracted-text');
+    if (!extractedText || extractedText.trim() === '') {
+        window.showToast("No text detected. Image might be blurry.", "warning");
+        textContainer.innerHTML = "<p><em>No readable text detected in the uploaded image. Please try a clearer photo.</em></p>";
+    } else {
+        // Convert extracted text newlines to HTML <br> tags
+        textContainer.innerHTML = extractedText.replace(/\n/g, '<br>');
+    }
     
     // Save to Firebase (fire and forget)
     saveToFirebase();
@@ -409,60 +431,20 @@ async function saveToFirebase() {
     }
 }
 
-function updateExtractedText() {
-    const editor = document.getElementById('extracted-text');
-    const lang = document.getElementById('language-select').value;
-    
-    // Simulating advanced formatting requested by user
-    let content = "";
-    
-    if (lang === 'en') {
-        content = `
-            <div style="color: var(--green); font-size: 0.8rem; margin-bottom: 1rem;"><i class="fa-solid fa-check-circle"></i> Complete Page Extracted Successfully</div>
-            <h2>Physics: Thermodynamics</h2>
-            <p><strong>First Law of Thermodynamics:</strong> Energy cannot be created or destroyed, only altered in form.</p>
-            <p>Equation:</p>
-            <div class="formula">ΔU = Q - W</div>
-            <p>Where:</p>
-            <ul>
-                <li>ΔU = change in internal energy</li>
-                <li>Q = heat added to the system</li>
-                <li>W = work done by the system</li>
-            </ul>
-            <br>
-            <h3>Efficiency Table</h3>
-            <table>
-                <tr><th>Engine Type</th><th>Max Efficiency</th></tr>
-                <tr><td>Carnot</td><td>100% (Theoretical)</td></tr>
-                <tr><td>Diesel</td><td>~45%</td></tr>
-            </table>
-            <br>
-            <p><em>[Diagram: Carnot Cycle p-V graph recreated successfully]</em></p>
-        `;
-    } else if (lang === 'hi') {
-        content = `
-            <h2>भौतिकी: ऊष्मागतिकी</h2>
-            <p><strong>ऊष्मागतिकी का प्रथम नियम:</strong> ऊर्जा न तो बनाई जा सकती है और न ही नष्ट की जा सकती है, केवल उसका रूप बदला जा सकता है।</p>
-            <div class="formula">ΔU = Q - W</div>
-        `;
-    } else if (lang === 'mr') {
-        content = `
-            <h2>भौतिकशास्त्र: थर्मोडायनामिक्स</h2>
-            <p><strong>थर्मोडायनामिक्सचा पहिला नियम:</strong> ऊर्जा निर्माण किंवा नष्ट केली जाऊ शकत नाही, ती केवळ एका रूपातून दुसऱ्या रूपात बदलली जाऊ शकते.</p>
-            <div class="formula">ΔU = Q - W</div>
-        `;
-    }
-    
-    editor.innerHTML = content;
+window.copyText = function() {
+    const textDiv = document.getElementById('extracted-text');
+    const textToCopy = textDiv.innerText || textDiv.textContent;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        window.showToast("Text copied to clipboard!", "success");
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        window.showToast("Failed to copy text", "error");
+    });
 }
-
-document.getElementById('language-select').addEventListener('change', () => {
-    showToast("Translating content...", "info");
-    setTimeout(updateExtractedText, 1000);
-});
 
 window.resetScanner = function resetScanner() {
     document.getElementById('result-area').classList.add('hidden');
+    document.getElementById('processing-area').classList.add('hidden');
     document.getElementById('upload-area').classList.remove('hidden');
     
     // Reset process state

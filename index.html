@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- PDF Export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Tesseract OCR -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
 <body class="light-mode">
     <!-- Splash Screen -->
@@ -299,8 +301,9 @@
                     <div class="result-actions">
                         <button class="btn-outline" onclick="resetScanner()">Discard</button>
                         <div class="export-group">
-                            <button class="btn-primary" onclick="exportDocument('docx')"><i class="fa-solid fa-file-word"></i> Export DOCX</button>
-                            <button class="btn-primary" onclick="exportDocument('pdf')"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
+                            <button class="btn-outline" onclick="copyText()"><i class="fa-regular fa-copy"></i> Copy Text</button>
+                            <button class="btn-primary" onclick="exportDocument('docx')"><i class="fa-solid fa-file-word"></i> Download DOCX</button>
+                            <button class="btn-primary" onclick="exportDocument('pdf')"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
                         </div>
                     </div>
                 </div>

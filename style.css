@@ -1,16 +1,16 @@
 :root {
-    /* Light Mode Theme - Red/White */
-    --bg-main: #fef2f2; /* red-50 */
+    /* Light Mode Theme - Sky Blue */
+    --bg-main: #f0f9ff; /* sky-50 */
     --bg-card: rgba(255, 255, 255, 0.7);
-    --text-main: #171717; /* neutral-900 */
-    --text-muted: #525252; /* neutral-500 */
-    --primary: #ef4444; /* red-500 */
-    --primary-hover: #dc2626; /* red-600 */
-    --primary-light: #fee2e2; /* red-100 */
-    --accent: #f87171; /* red-400 */
-    --border: rgba(254, 226, 226, 0.5);
+    --text-main: #0f172a; /* slate-900 */
+    --text-muted: #64748b; /* slate-500 */
+    --primary: #0284c7; /* sky-600 */
+    --primary-hover: #0369a1; /* sky-700 */
+    --primary-light: #e0f2fe; /* sky-100 */
+    --accent: #38bdf8; /* sky-400 */
+    --border: rgba(224, 242, 254, 0.5);
     --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-shadow: 0 8px 32px 0 rgba(239, 68, 68, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(2, 132, 199, 0.1);
     
     /* Stats Colors */
     --blue: #3b82f6;
@@ -19,14 +19,14 @@
 }
 
 .dark-mode {
-    --bg-main: #171717; /* neutral-900 */
-    --bg-card: rgba(38, 38, 38, 0.7);
-    --text-main: #f5f5f5; /* neutral-100 */
-    --text-muted: #a3a3a3; /* neutral-400 */
-    --primary: #f87171; /* red-400 */
-    --primary-hover: #fca5a5; /* red-300 */
-    --primary-light: #450a0a; /* red-950 */
-    --border: rgba(38, 38, 38, 0.5);
+    --bg-main: #0f172a; /* slate-900 */
+    --bg-card: rgba(30, 41, 59, 0.7);
+    --text-main: #f8fafc; /* slate-50 */
+    --text-muted: #94a3b8; /* slate-400 */
+    --primary: #38bdf8; /* sky-400 */
+    --primary-hover: #7dd3fc; /* sky-300 */
+    --primary-light: #0c4a6e; /* sky-900 */
+    --border: rgba(15, 23, 42, 0.5);
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
@@ -155,13 +155,13 @@ button {
 .btn-primary {
     background: var(--primary);
     color: white;
-    box-shadow: 0 4px 14px 0 rgba(239, 68, 68, 0.39);
+    box-shadow: 0 4px 14px 0 rgba(2, 132, 199, 0.39);
 }
 
 .btn-primary:hover {
     background: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px 0 rgba(239, 68, 68, 0.23);
+    box-shadow: 0 6px 20px 0 rgba(2, 132, 199, 0.23);
 }
 
 .btn-outline {
@@ -363,13 +363,13 @@ button {
     margin: 0 auto 1.5rem;
     font-size: 3rem;
     color: var(--primary);
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.4);
     animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
 }
 
 @keyframes pulse {
     to {
-        box-shadow: 0 0 0 45px rgba(239, 68, 68, 0);
+        box-shadow: 0 0 0 45px rgba(2, 132, 199, 0);
     }
 }
 
