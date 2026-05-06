@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note To Text Note | AI Scanner</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PDF Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="light-mode">
+    <!-- Splash Screen -->
+    <div id="splash">
+        <div class="splash-content">
+            <i class="fa-solid fa-expand"></i>
+            <h1>Note To Text <strong>Note</strong></h1>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Initializing AI Engines...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass-effect hidden" id="main-nav">
+        <div class="logo">
+            <i class="fa-solid fa-expand"></i>
+            <span>Note To Text <strong>Note</strong></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="active" onclick="switchTab('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="switchTab('scanner')">Scanner</a></li>
+            <li><a href="#" onclick="switchTab('history')">History</a></li>
+            <li><a href="#" onclick="switchTab('settings')">Settings</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="icon-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+            <div class="profile-avatar" onclick="switchTab('settings')">
+                <img src="https://ui-avatars.com/api/?name=User&background=ef4444&color=fff" alt="Profile">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Auth View -->
+        <section id="auth" class="view-section">
+            <div class="auth-container glass-card">
+                <!-- Login Form -->
+                <div id="form-login" class="auth-form-wrapper active">
+                    <i class="fa-solid fa-expand" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h2>Welcome Back</h2>
+                    <p class="subtitle">Login to Note To Text Note</p>
+                    
+                    <button class="btn-primary btn-google" onclick="loginWithGoogle()">
+                        <i class="fa-brands fa-google" style="color: #ea4335;"></i> Continue with Google
+                    </button>
+                    
+                    <div class="divider">or continue with email</div>
+
+                    <div class="auth-form">
+                        <input type="email" id="login-email" class="auth-input" placeholder="Email Address">
+                        <input type="password" id="login-password" class="auth-input" placeholder="Password">
+                        
+                        <div class="auth-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="remember-me"> Remember me
+                            </label>
+                            <a class="auth-link" onclick="switchAuthForm('form-forgot')">Forgot Password?</a>
+                        </div>
+                        
+                        <button class="btn-primary" style="justify-content: center; margin-top: 0.5rem;" onclick="loginEmail()">Login</button>
+                    </div>
+                    <div class="auth-footer">
+                        Don't have an account? <a class="auth-link" onclick="switchAuthForm('form-signup')">Sign Up</a>
+                    </div>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="form-signup" class="auth-form-wrapper">
+                    <i class="fa-solid fa-user-plus" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h2>Create Account</h2>
+                    <p class="subtitle">Join Note To Text Note today</p>
+
+                    <button class="btn-primary btn-google" onclick="loginWithGoogle()">
+                        <i class="fa-brands fa-google" style="color: #ea4335;"></i> Sign up with Google
+                    </button>
+                    
+                    <div class="divider">or register with email</div>
+
+                    <div class="auth-form">
+                        <input type="text" id="signup-name" class="auth-input" placeholder="Full Name">
+                        <input type="email" id="signup-email" class="auth-input" placeholder="Email Address">
+                        <input type="password" id="signup-password" class="auth-input" placeholder="Password">
+                        <input type="password" id="signup-confirm" class="auth-input" placeholder="Confirm Password">
+                        
+                        <button class="btn-primary" style="justify-content: center; margin-top: 0.5rem;" onclick="signupEmail()">Sign Up</button>
+                    </div>
+                    <div class="auth-footer">
+                        Already have an account? <a class="auth-link" onclick="switchAuthForm('form-login')">Login</a>
+                    </div>
+                </div>
+
+                <!-- Forgot Password Form -->
+                <div id="form-forgot" class="auth-form-wrapper">
+                    <i class="fa-solid fa-lock" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h2>Reset Password</h2>
+                    <p class="subtitle">Enter your email to receive a reset link</p>
+
+                    <div class="auth-form">
+                        <input type="email" id="forgot-email" class="auth-input" placeholder="Email Address">
+                        <button class="btn-primary" style="justify-content: center; margin-top: 1rem;" onclick="resetPassword()">Send Reset Link</button>
+                    </div>
+                    <div class="auth-footer">
+                        Remember your password? <a class="auth-link" onclick="switchAuthForm('form-login')">Back to Login</a>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Dashboard View -->
+        <section id="dashboard" class="view-section active">
+            <header class="view-header">
+                <div class="header-content">
+                    <h1 class="gradient-text">Welcome back, Organizer!</h1>
+                    <p>Manage your scanned notes, export them or digitize new ones.</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn-outline" onclick="switchTab('scanner'); setTimeout(() => document.getElementById('file-input').click(), 100);">
+                        <i class="fa-solid fa-file-arrow-up"></i> Convert File to Text
+                    </button>
+                    <button class="btn-primary" onclick="switchTab('scanner')">
+                        <i class="fa-solid fa-camera"></i> New Scan
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-stats">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon bg-blue"><i class="fa-solid fa-file-lines"></i></div>
+                    <div class="stat-info">
+                        <h3>142</h3>
+                        <p>Total Scans</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon bg-purple"><i class="fa-solid fa-language"></i></div>
+                    <div class="stat-info">
+                        <h3>85</h3>
+                        <p>Translated</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon bg-green"><i class="fa-solid fa-file-export"></i></div>
+                    <div class="stat-info">
+                        <h3>112</h3>
+                        <p>Exported</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Recent Scans</h2>
+            <div class="recent-scans">
+                <div class="scan-item glass-card">
+                    <div class="scan-thumb"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div class="scan-details">
+                        <h4>Physics Formulas - Chapter 4</h4>
+                        <p>Scanned 2 hours ago • Handwritten</p>
+                    </div>
+                    <div class="scan-actions">
+                        <button class="icon-btn tooltip" data-tooltip="Edit text"><i class="fa-solid fa-pen"></i></button>
+                        <button class="icon-btn tooltip" data-tooltip="Download DOCX"><i class="fa-solid fa-download"></i></button>
+                    </div>
+                </div>
+                <div class="scan-item glass-card">
+                    <div class="scan-thumb"><i class="fa-solid fa-file-word"></i></div>
+                    <div class="scan-details">
+                        <h4>Meeting Minutes - Project X</h4>
+                        <p>Scanned yesterday • Printed</p>
+                    </div>
+                    <div class="scan-actions">
+                        <button class="icon-btn tooltip" data-tooltip="Edit text"><i class="fa-solid fa-pen"></i></button>
+                        <button class="icon-btn tooltip" data-tooltip="Download DOCX"><i class="fa-solid fa-download"></i></button>
+                    </div>
+                </div>
+                <div class="scan-item glass-card">
+                    <div class="scan-thumb"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div class="scan-details">
+                        <h4>Engineering Diagrams</h4>
+                        <p>Scanned 3 days ago • Diagram Detected</p>
+                    </div>
+                    <div class="scan-actions">
+                        <button class="icon-btn tooltip" data-tooltip="Edit text"><i class="fa-solid fa-pen"></i></button>
+                        <button class="icon-btn tooltip" data-tooltip="Download DOCX"><i class="fa-solid fa-download"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scanner View -->
+        <section id="scanner" class="view-section">
+            <header class="view-header">
+                <div>
+                    <h1 class="gradient-text">AI Intelligent Scanner</h1>
+                    <p>Upload or scan notes to extract text, diagrams, and formulas.</p>
+                </div>
+            </header>
+
+            <div class="scanner-container glass-card">
+                <!-- Upload Area -->
+                <div id="upload-area" class="upload-area">
+                    <input type="file" id="file-input" accept="image/*, application/pdf" hidden>
+                    <div class="upload-content" onclick="document.getElementById('file-input').click()">
+                        <div class="pulse-ring">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3>Click to Upload or Drag & Drop</h3>
+                        <p>Supports Images (JPG, PNG) & PDF</p>
+                        <div class="upload-options">
+                            <button class="btn-outline" onclick="event.stopPropagation(); startCamera()"><i class="fa-solid fa-camera"></i> Use Camera</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camera Area -->
+                <div id="camera-area" class="camera-area hidden">
+                    <video id="camera-feed" autoplay playsinline></video>
+                    <div class="camera-overlay">
+                        <div class="scan-frame">
+                            <div class="corner top-left"></div>
+                            <div class="corner top-right"></div>
+                            <div class="corner bottom-left"></div>
+                            <div class="corner bottom-right"></div>
+                            <div class="scan-line"></div>
+                        </div>
+                    </div>
+                    <div class="camera-controls">
+                        <button class="btn-outline" onclick="stopCamera()">Cancel</button>
+                        <button class="btn-capture" onclick="captureImage()"></button>
+                        <button class="icon-btn"><i class="fa-solid fa-bolt"></i></button>
+                    </div>
+                </div>
+
+                <!-- Processing Area -->
+                <div id="processing-area" class="processing-area hidden">
+                    <div class="ai-loader">
+                        <div class="spinner"></div>
+                        <div class="ai-brain"><i class="fa-solid fa-brain"></i></div>
+                    </div>
+                    <h3 id="processing-status">Analyzing Document...</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="scan-progress"></div>
+                    </div>
+                    <ul class="processing-steps">
+                        <li class="active"><i class="fa-solid fa-check"></i> Image Enhancement & Complete Page Scan</li>
+                        <li id="step-ocr" class="pending"><i class="fa-regular fa-circle"></i> OCR Text Extraction</li>
+                        <li id="step-diagram" class="pending"><i class="fa-regular fa-circle"></i> Diagram & Math Recognition</li>
+                    </ul>
+                </div>
+
+                <!-- Result Area -->
+                <div id="result-area" class="result-area hidden">
+                    <div class="result-layout">
+                        <!-- Original Image -->
+                        <div class="result-image-pane">
+                            <div class="pane-header">Original</div>
+                            <div class="image-wrapper">
+                                <img id="scanned-image-preview" src="" alt="Scanned Document">
+                            </div>
+                        </div>
+                        
+                        <!-- Extracted Content -->
+                        <div class="result-content-pane">
+                            <div class="pane-header">
+                                <span>Extracted Content</span>
+                                <div class="pane-actions">
+                                    <select id="language-select" class="lang-select">
+                                        <option value="en">English</option>
+                                        <option value="hi">Hindi</option>
+                                        <option value="mr">Marathi</option>
+                                    </select>
+                                    <button class="icon-btn tooltip" data-tooltip="Summarize" onclick="summarizeNotes()"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+                                    <button class="icon-btn tooltip" data-tooltip="Listen" onclick="readAloud()"><i class="fa-solid fa-volume-high"></i></button>
+                                </div>
+                            </div>
+                            <div class="editor-wrapper">
+                                <div id="extracted-text" class="rich-text-editor" contenteditable="true">
+                                    <!-- Extracted text will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-actions">
+                        <button class="btn-outline" onclick="resetScanner()">Discard</button>
+                        <div class="export-group">
+                            <button class="btn-primary" onclick="exportDocument('docx')"><i class="fa-solid fa-file-word"></i> Export DOCX</button>
+                            <button class="btn-primary" onclick="exportDocument('pdf')"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History View -->
+        <section id="history" class="view-section">
+             <header class="view-header">
+                <div>
+                    <h1 class="gradient-text">Document History</h1>
+                    <p>All your past scanned notes stored securely in the cloud.</p>
+                </div>
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search inside notes...">
+                </div>
+            </header>
+            
+            <div class="empty-state">
+                <i class="fa-solid fa-folder-open"></i>
+                <h3>No more history</h3>
+                <p>You have reached the end of your document list.</p>
+            </div>
+        </section>
+
+        <!-- Settings View -->
+        <section id="settings" class="view-section">
+             <header class="view-header">
+                <div>
+                    <h1 class="gradient-text">Profile & Settings</h1>
+                    <p>Manage your application preferences and account.</p>
+                </div>
+            </header>
+            
+            <div class="settings-container glass-card" style="padding: 2rem;">
+                <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem;">
+                    <img src="https://ui-avatars.com/api/?name=User&background=ef4444&color=fff&size=80" alt="Profile" style="border-radius: 50%; border: 3px solid var(--primary);">
+                    <div>
+                        <h2 style="color: var(--text-main);">Demo User</h2>
+                        <p style="color: var(--text-muted);">student@engineering.edu</p>
+                        <button class="btn-outline" style="margin-top: 0.5rem; padding: 0.4rem 1rem; font-size: 0.8rem;">Edit Profile</button>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Preferences</h3>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Dark Mode</h4>
+                        <p>Toggle dark mode theme</p>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleTheme(); this.classList.toggle('active')"></div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Offline Mode</h4>
+                        <p>Save processing data locally</p>
+                    </div>
+                    <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Auto-Save Notes</h4>
+                        <p>Automatically backup notes to cloud</p>
+                    </div>
+                    <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Export without watermark</h4>
+                        <p>Premium feature enabled</p>
+                    </div>
+                    <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+                </div>
+                
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--primary);">Account</h3>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Password Protection</h4>
+                        <p>Require password to open exported PDFs</p>
+                    </div>
+                    <button class="btn-outline">Configure</button>
+                </div>
+                <div class="setting-item" style="border: none;">
+                    <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="logout()">Sign Out</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modals & Toasts -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
