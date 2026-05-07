@@ -1,5 +1,8 @@
 # Note-To-Text-Note
 
+
+Link: https://pavanwadile77.github.io/Note-To-Text-Note/
+
 A smart AI-powered note scanning application that converts handwritten notes, diagrams, and notebook pages into editable text, PDF, and DOCX files with high accuracy.
 
 ---
