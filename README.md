@@ -1,181 +1,63 @@
-# Note-To-Text-Note
+# Note To Text Note 📝
 
+An AI-assisted note scanning application that helps convert handwritten notes and notebook pages into **editable digital content**.
 
-Link: https://pavanwadile77.github.io/Note-To-Text-Note/
+**Live Demo:** https://pavanwadile77.github.io/Note-To-Text-Note/
 
-A smart AI-powered note scanning application that converts handwritten notes, diagrams, and notebook pages into editable text, PDF, and DOCX files with high accuracy.
+## ✨ Features
 
----
+- Upload notebook and handwritten-note images
+- OCR / AI-assisted text extraction
+- Diagram-aware note processing
+- Editable extracted text
+- Export to PDF, DOCX, and TXT
+- User authentication
+- Cloud storage support
+- Mobile-friendly interface
+- Scan history / saved notes workflow
 
-## 📌 Features
+## 🔄 How It Works
 
-* 📷 Upload notebook images
-* ✍️ Convert handwritten notes to editable text
-* 📊 Detect and preserve diagrams
-* 📄 Export as PDF and DOCX
-* 🔍 Full-page smart scanning
-* 🤖 AI-powered OCR processing
-* 👤 User Signup/Login System
-* ☁️ Cloud storage support
-* 📱 Mobile-friendly UI
-* 🌙 Clean modern interface
-
----
-
-## 🚀 How It Works
-
-1. User uploads notebook image
-2. AI scans complete page
-3. Text and diagrams are detected
-4. Editable output is generated
-5. User can download as:
-
-   * PDF
-   * DOCX
-   * TXT
-
----
-
-## 🛠️ Technologies Used
-
-* HTML
-* CSS
-* JavaScript
-* Firebase Authentication
-* Firebase Storage
-* OCR / AI APIs
-* PDF Generator
-* DOCX Export Library
-
----
-
-## 📂 Project Structure
-
-```bash
-Note-To-Text-Note/
-│
-├── index.html
-├── login.html
-├── signup.html
-├── dashboard.html
-│
-├── css/
-│   └── style.css
-│
-├── js/
-│   ├── app.js
-│   ├── auth.js
-│   ├── scanner.js
-│   └── export.js
-│
-├── assets/
-│   ├── images/
-│   └── icons/
-│
-└── firebase/
-    └── config.js
+```text
+Upload note image
+      ↓
+OCR / AI processing
+      ↓
+Text & diagram detection
+      ↓
+Editable result
+      ↓
+Export / save
 ```
 
----
+## 🛠 Tech Stack
 
-## 🔐 Authentication
+- HTML5
+- CSS3
+- JavaScript
+- Firebase Authentication
+- Firebase Storage
+- OCR / AI services
+- PDF generation
+- DOCX export
 
-The app includes:
-
-* User Signup
-* Login
-* Logout
-* Secure Firebase Authentication
-
----
-
-## 📤 Export Options
-
-Users can:
-
-* Download notes as PDF
-* Download notes as DOCX
-* Copy extracted text
-* Save scans to account
-
----
-
-## 🎯 Main Goal
-
-To help students and teachers digitize handwritten notes quickly and accurately while preserving diagrams and formatting.
-
----
-
-## 💡 Future Improvements
-
-* Multi-language support
-* Real-time camera scanning
-* AI summary generation
-* Diagram recreation
-* Cloud sync
-* Dark mode
-
----
-
-## 📸 Screenshots
-
-Add your app screenshots here.
+## ▶️ Run Locally
 
 ```bash
-/screenshots/home.png
-/screenshots/scan.png
-/screenshots/result.png
+git clone https://github.com/PavanWadile77/Note-To-Text-Note.git
+cd Note-To-Text-Note
 ```
 
----
+Open `index.html` using a local web server for development.
 
-## ⚙️ Installation
+## ⚠️ Configuration
 
-```bash
-git clone https://github.com/yourusername/note-to-text-note.git
+If Firebase or external AI/OCR services are enabled, configure the required environment/service settings according to the project files. Never commit private credentials.
 
-cd note-to-text-note
+## Repository
 
-open index.html
-```
+https://github.com/PavanWadile77/Note-To-Text-Note
 
----
-
-## 🌐 Deployment
-
-You can deploy using:
-
-* Firebase Hosting
-* Netlify
-* Vercel
-* GitHub Pages
-
----
-
-## 👨‍💻 Author
+## Author
 
 **Pavan Wadile**
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## ⭐ Support
-
-If you like this project:
-
-* Star the repository
-* Share with friends
-* Contribute improvements
-
----
-
-## 📧 Contact
-
-For suggestions or support:
-
-* Email: pavanwadile77@gmail.com
