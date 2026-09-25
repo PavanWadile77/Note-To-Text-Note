@@ -12,11 +12,10 @@ An AI-assisted note digitization application that converts **handwritten notes a
 - PDF, DOCX, and TXT export
 - Authentication and cloud storage
 - Saved notes / scan history workflow
-- Mobile-friendly interface
 
 ## 🔄 Workflow
 ```text
-Image → OCR / AI → Text & Diagram Detection → Edit → Export / Save
+Image → OCR / AI → Detection → Edit → Export / Save
 ```
 
 ## 🛠️ Tech Stack
@@ -28,10 +27,7 @@ git clone https://github.com/PavanWadile77/Note-To-Text-Note.git
 cd Note-To-Text-Note
 ```
 
-Run the application through a local web server.
-
-## 🔐 Security
-Keep Firebase and external AI/OCR credentials private.
+Run through a local web server.
 
 ## 🔗 Links
 - 🌐 [Live Demo](https://pavanwadile77.github.io/Note-To-Text-Note/)
