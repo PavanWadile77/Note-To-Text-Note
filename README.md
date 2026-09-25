@@ -1,63 +1,41 @@
 # Note To Text Note 📝
 
-An AI-assisted note scanning application that helps convert handwritten notes and notebook pages into **editable digital content**.
+An AI-assisted note digitization application that converts **handwritten notes and notebook images into editable digital content**.
 
-**Live Demo:** https://pavanwadile77.github.io/Note-To-Text-Note/
+🌐 **Live Demo:** https://pavanwadile77.github.io/Note-To-Text-Note/
 
 ## ✨ Features
-
-- Upload notebook and handwritten-note images
-- OCR / AI-assisted text extraction
-- Diagram-aware note processing
-- Editable extracted text
-- Export to PDF, DOCX, and TXT
-- User authentication
-- Cloud storage support
+- Handwritten-note image upload
+- OCR / AI-assisted extraction
+- Text and diagram processing
+- Editable extracted content
+- PDF, DOCX, and TXT export
+- Authentication and cloud storage
+- Saved notes / scan history workflow
 - Mobile-friendly interface
-- Scan history / saved notes workflow
 
-## 🔄 How It Works
-
+## 🔄 Workflow
 ```text
-Upload note image
-      ↓
-OCR / AI processing
-      ↓
-Text & diagram detection
-      ↓
-Editable result
-      ↓
-Export / save
+Image → OCR / AI → Text & Diagram Detection → Edit → Export / Save
 ```
 
-## 🛠 Tech Stack
-
-- HTML5
-- CSS3
-- JavaScript
-- Firebase Authentication
-- Firebase Storage
-- OCR / AI services
-- PDF generation
-- DOCX export
+## 🛠️ Tech Stack
+**HTML5 · CSS3 · JavaScript · Firebase · OCR / AI Services · PDF Generation · DOCX Export**
 
 ## ▶️ Run Locally
-
 ```bash
 git clone https://github.com/PavanWadile77/Note-To-Text-Note.git
 cd Note-To-Text-Note
 ```
 
-Open `index.html` using a local web server for development.
+Run the application through a local web server.
 
-## ⚠️ Configuration
+## 🔐 Security
+Keep Firebase and external AI/OCR credentials private.
 
-If Firebase or external AI/OCR services are enabled, configure the required environment/service settings according to the project files. Never commit private credentials.
+## 🔗 Links
+- 🌐 [Live Demo](https://pavanwadile77.github.io/Note-To-Text-Note/)
+- 💻 [GitHub Repository](https://github.com/PavanWadile77/Note-To-Text-Note)
 
-## Repository
-
-https://github.com/PavanWadile77/Note-To-Text-Note
-
-## Author
-
+## 👨‍💻 Author
 **Pavan Wadile**
