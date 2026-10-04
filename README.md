@@ -1,5 +1,14 @@
 # Note To Text Note 📝
 
+<div align="center">
+
+**OCR / AI • Productivity Application**
+
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+
+</div>
+
+
 An AI-assisted note digitization application that converts **handwritten notes and notebook images into editable digital content**.
 
 🌐 **Live Demo:** https://pavanwadile77.github.io/Note-To-Text-Note/
@@ -35,3 +44,17 @@ Run through a local web server.
 
 ## 👨‍💻 Author
 **Pavan Wadile**
+
+## 🔧 Engineering Focus
+
+Handwritten-note digitization, OCR/AI extraction, editing and document export.
+
+---
+
+<div align="center">
+
+**Pavan Wadile · B.Tech Information Technology**
+
+[GitHub](https://github.com/PavanWadile77)
+
+</div>
