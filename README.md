@@ -2,6 +2,13 @@
 
 <div align="center">
 
+<img src="https://komarev.com/ghpvc/?username=PavanWadile77&label=PROFILE+VIEWS&color=2563EB&style=for-the-badge" alt="Profile views" />
+
+</div>
+
+
+<div align="center">
+
 **OCR / AI • Productivity Application**
 
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
