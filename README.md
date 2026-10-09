@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="https://komarev.com/ghpvc/?username=PavanWadile77&label=PROFILE+VIEWS&color=2563EB&style=for-the-badge" alt="Profile views" />
+<img src="https://hits.sh/github.com/PavanWadile77/Note-To-Text-Note.svg?style=for-the-badge&label=REPOSITORY%20VIEWS&color=2563eb" alt="Repository views" />
 
 </div>
 
